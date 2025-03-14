@@ -1,0 +1,7 @@
+## for triton
+# torch
+# triton
+# setuptools
+
+## for jax
+jax

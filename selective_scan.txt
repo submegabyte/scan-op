@@ -1,0 +1,34 @@
+h0 = b0 x0
+h1 = a1 b0 x0 + b1 x1
+h2 = a2 a1 b0 x0 + a2 b1 x1 + b2 x2
+h3 = a3 a2 a1 b0 x0 + a3 a2 b1 x1 + a3 b2 x2 + b3 x3
+
+bx_i = bi xi
+
+h0 = bx_0
+h1 = a1 bx_0 + bx_1
+h2 = a2 a1 bx_0 + a2 bx_1 + bx_2
+h3 = a3 a2 a1 bx_0 + a3 a2 bx_1 + a3 bx_2 + bx_3
+
+--------------
+
+## https://arxiv.org/pdf/2208.04933
+
+* = associative operation
+@ = matrix multiplication
+
+(sx, sy) * (cx, cy) = (cx @ sx, cx @ sy + cy)
+
+c0 = s0 = (I, 0)
+
+c1 = (a1, bx_1)
+s1 = s0 * c1 = (a1, h1)
+
+c2 = (a2, bx_2)
+s2 = s1 * c2 = (a1, h2)
+
+c3 = (a3, bx_3)
+s3 = s2 * c3 = (a2 a1, h3)
+
+c4 = (a4, bx_4)
+s4 = s3 * c4 = (a3 ... a1, h4)
