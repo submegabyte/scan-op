@@ -456,7 +456,6 @@ configs = [
     {"batch": 4, "seq_len": 128, "channels": 4},
     {"batch": 16, "seq_len": 128, "channels": 4},
     {"batch": 16, "seq_len": 512, "channels": 4},
-    {"batch": 16, "seq_len": 4096, "channels": 4},
 ]
 
 for config in configs:
