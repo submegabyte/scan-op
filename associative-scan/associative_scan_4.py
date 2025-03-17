@@ -166,9 +166,9 @@ def get_identity_element(op: Callable) -> Union[int, float]:
         return 1  # For bitwise AND, identity is all 1s
     elif op is operator.or_:
         return 0  # For bitwise OR, identity is all 0s
-    elif op is max:
+    elif op is torch.max:
         return float('-inf')
-    elif op is min:
+    elif op is torch.min:
         return float('inf')
     else:
         raise ValueError("Unknown operator. Please provide an identity element.")
@@ -328,13 +328,15 @@ benchmark_configs = [
     (1, 1000, 1),    # Single batch, long sequence, single channel
     (10, 100, 1),    # Multiple batches, medium sequence, single channel
     (10, 100, 10),   # Multiple batches, medium sequence, multiple channels
-    (32, 128, 64)    # Typical ML batch/sequence/feature configuration
+    (32, 128, 64),    # Typical ML batch/sequence/feature configuration
+    (32, 512, 64),
+    (32, 2048, 64),
 ]
 
 operators = [
     (operator.add, "Addition"),
     (operator.mul, "Multiplication"),
-    (max, "Maximum"),
+    (torch.max, "Maximum"),
 ]
 
 for batch, length, channels in benchmark_configs:
