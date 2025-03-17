@@ -166,9 +166,9 @@ def get_identity_element(op: Callable) -> Union[int, float]:
         return 1  # For bitwise AND, identity is all 1s
     elif op is operator.or_:
         return 0  # For bitwise OR, identity is all 0s
-    elif op is max:
+    elif op is torch.max:
         return float('-inf')
-    elif op is min:
+    elif op is torch.min:
         return float('inf')
     else:
         raise ValueError("Unknown operator. Please provide an identity element.")
@@ -319,7 +319,7 @@ verify_scan_batched(test_tensor, operator.mul, 1, dim=1)
 
 # Test with maximum
 print("\n=== Maximum ===")
-verify_scan_batched(test_tensor, max, float('-inf'), dim=1)
+verify_scan_batched(test_tensor, torch.max, float('-inf'), dim=1)
 
 # Test scanning along different dimensions
 print("\n=== Scanning Along Batch Dimension (dim=0) ===")
