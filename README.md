@@ -13,3 +13,5 @@ https://developer.nvidia.com/gpugems/gpugems3/part-vi-gpu-computing/chapter-39-p
 https://rocm.docs.amd.com/projects/rocPRIM/en/latest/device_ops/scan.html
 
 https://triton-lang.org/main/python-api/generated/triton.language.associative_scan.html
+
+https://jameschen.io/jekyll/update/2024/02/12/mamba.html

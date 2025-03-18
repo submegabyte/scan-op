@@ -19,6 +19,7 @@ class SimpleScanSequence():
         self.L = self.shape[self.dim_L]
     
     def __getitem__(self, i):
+        ## i can be an integer, slice or a 1D array_like
         index = [slice(None)] * self.dim
 
         index[self.dim_L] = i
@@ -27,8 +28,12 @@ class SimpleScanSequence():
         # a = self.a[index]
         data = self.data[index]
 
-        # return a
-        return data
+        array_like = Union[torch.Tensor, list]
+        if isinstance(i, slice) or isinstance(i, array_like):
+            return self.__class__(data, self.dim_L)
+        else:
+            # return a
+            return data
     
     def __setitem__(self, i, data):
         index = [slice(None)] * self.dim
@@ -50,6 +55,9 @@ class SimpleScanSequence():
         data = identity.unsqueeze(dim_L).repeat(*r)
         return cls(data, dim_L=dim_L)
 
+    def clone(self):
+        data = self.data.clone()
+        return self.__class__(data, dim_L=self.dim_L)
 
 if __name__ == "__main__":
 
@@ -78,3 +86,5 @@ if __name__ == "__main__":
     c = SimpleScanSequence.from_identity(identity, L)
     print(c.shape)
     # print(c.a)
+    print(c[34:412].shape)
+    print(c[[66,67,99,102,333]].shape)

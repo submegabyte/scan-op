@@ -29,8 +29,12 @@ class SelectiveScanSequence():
         # b = self.b[index]
         a = self.data[0][index]
         b = self.data[1][index]
+        data = (a, b)
 
-        return a, b
+        if isinstance(i, int):
+            return data
+        else:
+            return self.__class__(data, self.dim_L)
     
     def __setitem__(self, i, data):
         index = [slice(None)] * self.dim
@@ -56,6 +60,12 @@ class SelectiveScanSequence():
         b = identity[1].unsqueeze(dim_L).repeat(*r)
         data = (a, b)
         return cls(data, dim_L=dim_L)
+    
+    def clone(self):
+        a = self.data[0].clone()
+        b = self.data[1].clone()
+        data = (a, b)
+        return self.__class__(data)
 
 if __name__ == "__main__":
 
@@ -83,5 +93,11 @@ if __name__ == "__main__":
     identity = (torch.ones(B, D, N), torch.zeros(B, D, N))
 
     c = SelectiveScanSequence.from_identity(identity, L)
-    print(c.a.shape, c.b.shape)
+    print(c.data[0].shape, c.data[1].shape)
     # print(c.a)
+
+    d = c[34:412]
+    print(d.data[0].shape, d.data[1].shape)
+
+    e = c[[66,67,99,102,333]]
+    print(e.data[0].shape, e.data[1].shape)
